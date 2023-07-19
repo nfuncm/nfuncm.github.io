@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Node Function Manager | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Node Function Manager | Home">
+    <meta property="og:site_name" content="Node Function Manager">
+    <meta property="og:description" content="Share Functions not Modules">
+    <meta name="twitter:title" content="Node Function Manager | Home">
+    <meta name="twitter:description" content="Node Function Manager: Share Functions not Modules">
+    <meta property="og:locale" content="en_US">
+    <meta charset="UTF-8">
+    <meta name="application-name" content="Node Function Manager">
+    <link rel="alternate" href="https://nfuncm.github.io/" hreflang="x-default">
+    <link rel="alternate" href="https://nfuncm.github.io/" hreflang="en">
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/site.css">
+  </head>
+  <body>
+
+
+  <h4>Welcome to the Node Function Manager or NfuncM for short</h4>
+<blockquote>
+<p>Share Functions not Modules!</p>
+</blockquote>
+<hr>
+<h4>What is NfuncM?</h4>
+<p>Have you ever thought there needed to be a middle ground between a snippet of code on Stack Overflow and a full blown NPM Module?</p>
+<p>Have you ever seen an NPM module and thought to yourself &quot;This really shouldn't be a module.&quot; or &quot;It's just a couple lines of code&quot;?</p>
+<p>Personally, I've thought this myself many times, but came the conclusion, that receiving updates to this short valuable code is something that can't be missed.</p>
+<p>But with the days of the JavaScript ecosystem moving fast and breaking things, and megabytes of dependencies for any web app, NfuncM returns to a simpler workflow.</p>
+<p>One were working together in the Open Source community is still valued, but so is simplicity, small install sizes, and non-breaking changes.</p>
+<p>This is what the Node Function Manager aims to achieve.</p>
+<h4>Why NfuncM?</h4>
+<p>The concept behind NfuncM is that if your application needs some snippet of code, say a regex to check the validity of an email address.</p>
+<p>Currently there are three major ways to solve this:</p>
+<ol>
+<li class="lvl-3">
+<p>Write it yourself, perfectly valid, but not for everyone.</p>
+</li>
+<li class="lvl-3">
+<p>Install a module on NPM that does this for you. Being aware that this module may add to your install size unnecessarily, or may experience breaking changes that you must keep up with at all times.</p>
+</li>
+<li class="lvl-3">
+<p>Search online, likely StackOverflow, for someone else's solution. Once you've found this answer on StackOverflow you hit copy and paste, and be done with it.</p>
+</li>
+</ol>
+<p>Continuing on this example, lets assume you've taken the answer from StackOverflow.</p>
+<p>There are now to big concerns:</p>
+<ol>
+<li class="lvl-3">
+<p>Most users don't even realize that code snippets have a license on StackOverflow that should be respected. And unless you've done your research you likely aren't either.</p>
+</li>
+<li class="lvl-3">
+<p>What if six months from now the original author realizes there was a mistake, or the RFC changes, and this regex is updated. You have no way to know, and likely will never look at that answer again, until a user reports an issue.</p>
+</li>
+</ol>
+<p>With NfuncM, ideally we can avoid these issues.</p>
+<h4>How does NfuncM Work?</h4>
+<p>With NfuncM, anyone can publish a function, which 'publish' is being used loosely here; there is no centralized repository for functions, a function can be installed from any possible URL that returns JavaScript. Once published a user can then install this function, which using our earlier example looks like this:</p>
+
+<div style="position: relative">
+	<pre><code class="hljs language-shell">nfm install emailRegex https://codesite.com/awesome-user/emailRegex/source.js
+</code></pre>
+
+	<button class="markdown-it-code-copy " data-clipboard-text="nfm install emailRegex https://codesite.com/awesome-user/emailRegex/source.js
+" style="position: absolute; top: 7.5px; right: 6px; cursor: pointer; outline: none;" title="Copy">
+		<span style="font-size: 21px; opacity: 0.4;" class="mdi mdi-content-copy"></span>
+	</button>
+</div>
+<p>From here, NfuncM will register this installation in your <code>package.json</code>, which is used similar to NPM's or Yarn's lock files, and saves this module into a folder titled <code>nfm</code> in your project.</p>
+<p>Now within your code you can simply use the following to access this function:</p>
+
+<div style="position: relative">
+	<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> { emailRegex } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;./nfm&quot;</span>);
+</code></pre>
+
+	<button class="markdown-it-code-copy " data-clipboard-text="const { emailRegex } = require(&quot;./nfm&quot;);
+" style="position: absolute; top: 7.5px; right: 6px; cursor: pointer; outline: none;" title="Copy">
+		<span style="font-size: 21px; opacity: 0.4;" class="mdi mdi-content-copy"></span>
+	</button>
+</div>
+<p>That's it.</p>
+<p>You are now free to open up the <code>nfm</code> folder in your project and figure out exactly how this function works without digging into hundreds of <code>node_modules</code>.</p>
+<p>Additionally, since this is a single file of such small size, it's easy to include this into a GitHub repository if you'd rather not ask all maintainers to install NfuncM, or it can be easily included within a Docker image to reduce a build step.</p>
+<p>And since all function publishers are highly encouraged to keep licensing information within their function you rarely need to go digging for this information.</p>
+<h4>Okay but really, why should I use NfuncM and not NPM?</h4>
+<p>The honest answer, is this isn't always the case. Some snippets of code <strong>absolutely</strong> should be an NPM module. Where you are able to install dependencies, have hundreds of files, and use whatever post install or transpilation steps needed. But on the flip side, many modules consist of no dependencies and under 50 lines of code. This solution is focused precisely on this modules.</p>
+<p>But when using NfuncM there are many bonus' even if not all unique:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Snippets are still able to receive updates: You don't need to hunt on StackOverflow for updates to a comment you used years later.</p>
+</li>
+<li class="lvl-2">
+<p>Authors Licenses are respected: Meanwhile currently many users don't realize StackOverflow snippets require licensing at all.</p>
+</li>
+<li class="lvl-2">
+<p>Less Disk Space: Due to the limitations placed on functions, you'll no longer find hundreds of dependencies being installed by your one.</p>
+</li>
+<li class="lvl-2">
+<p>Simplicity: If configured correctly, there's no transpiling steps needed, to install commands needed, or complex hoisting logic involved in accessing files that are as local as your code itself.</p>
+</li>
+</ul>
+<p>Beyond this, the NfuncM package itself is unobtrusive and as simple as possible:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>NfuncM has <strong>zero</strong> dependencies</p>
+</li>
+<li class="lvl-2">
+<p>NfuncM is only 12.9 kB unpacked</p>
+</li>
+</ul>
+<p>The goal of NfuncM is to simplify a portion of software development, and respect the authors of helpful snippets as much as possible.</p>
+<h4>How do I get started?</h4>
+<p>To start using NfuncM, it's easy!</p>
+<p>Firstly, install NfuncM to your system:</p>
+
+<div style="position: relative">
+	<pre><code class="hljs language-shell">npm install nfuncm/nfuncm
+</code></pre>
+
+	<button class="markdown-it-code-copy " data-clipboard-text="npm install nfuncm/nfuncm
+" style="position: absolute; top: 7.5px; right: 6px; cursor: pointer; outline: none;" title="Copy">
+		<span style="font-size: 21px; opacity: 0.4;" class="mdi mdi-content-copy"></span>
+	</button>
+</div>
+<p>Then use:</p>
+
+<div style="position: relative">
+	<pre><code class="hljs language-shell"><span class="hljs-meta prompt_">&gt; </span><span class="language-bash">nfm <span class="hljs-built_in">help</span></span>
+<span class="hljs-meta prompt_">&gt;</span><span class="language-bash">
+NFM: Node Function Manager</span>
+Allows installation of individual functions to access in JavaScript applications.
+
+Usage: nfm &lt;command&gt;
+
+nfm install               Install all functions into your project
+nfm install &lt;foo&gt; &lt;url&gt;   Add the function &lt;foo&gt; to your project with the URL &lt;url&gt;
+nfm uninstall &lt;foo&gt;       Remove the function &lt;foo&gt; from your project
+nfm help                  Display this help message
+<span class="hljs-meta prompt_">&gt;</span><span class="language-bash">
+</span></code></pre>
+
+	<button class="markdown-it-code-copy " data-clipboard-text="> nfm help
+>
+NFM: Node Function Manager
+Allows installation of individual functions to access in JavaScript applications.
+
+Usage: nfm <command>
+
+nfm install               Install all functions into your project
+nfm install <foo> <url>   Add the function <foo> to your project with the URL <url>
+nfm uninstall <foo>       Remove the function <foo> from your project
+nfm help                  Display this help message
+>
+" style="position: absolute; top: 7.5px; right: 6px; cursor: pointer; outline: none;" title="Copy">
+		<span style="font-size: 21px; opacity: 0.4;" class="mdi mdi-content-copy"></span>
+	</button>
+</div>
+<p>Keep in mind how simple the install command really is:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>The name of the function can be whatever you want, obviously recommended to match the name of the function, but this has lots of freedom to be anything, to ensure there are never collisions, either in your code or with another function.</p>
+</li>
+<li class="lvl-2">
+<p>The URL is just that. Any URL that can be accessed via <code>http</code> or <code>https</code></p>
+</li>
+</ul>
+<h4>How do Configure NfuncM</h4>
+<p>Any and all configuration of NfuncM is done via your function/package's <code>package.json</code>, where everything should be managed under and <code>nfm</code> top level key.</p>
+<p>The following options are valid within this key:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>installed</code>: This is an object of all functions installed to your code. Where the key to each object is the custom name assigned during installation, and the value is the raw link to install from.</p>
+</li>
+<li class="lvl-2">
+<p><code>minify</code>: This value is used by <a href="https://github.com/nfuncm/nfuncm-packager"><code>nfuncm-packager</code></a> which controls how or if minification is used on your function. More details are available in that package's <a href="https://github.com/nfuncm/nfuncm-packager#configuration">configuration</a>.</p>
+</li>
+<li class="lvl-2">
+<p><code>useHttp</code>: Can be used if for any reason HTTP should be forced for all function installation. Such as if you receive SSL errors, or are behind a proxy.</p>
+</li>
+</ul>
+<h4>Developing a Function</h4>
+<p>Developing a function is made to be as easy as possible, although there are some hard rules, and some best practices that should be following.</p>
+<p>But first the basics of a function:</p>
+<p>A function is really any single file that uses CommonJS to export any utility for other code to use. This can be anything, from exporting a <code>const</code> of complicated <code>Regex</code>, or a simple function to check the type of a value, or executes a mathematical operation, or anything else you can dream up!</p>
+<p>But like mentioned, there are some limits to what can be done:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>A function, when installed by an end user, <strong>must</strong> be a single file. Now without any fancy CI steps, this means the function should consist of a single file only. Not using any NPM dependencies, submodules, or even other functions.</p>
+</li>
+<li class="lvl-2">
+<p>There is intentionally zero support of any post installation steps, meaning any transpiling or converting from TypeScript or CoffeeScript must happen in your CI environment, leaving the user with a single file to install.</p>
+</li>
+</ul>
+<p>But beyond that it's good to know the best practices to attempt to give everyone the best experience:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Scope: It's recommended to keep the scope of any given function small. As the function should attempt to be simplistic and a 'single step' of code, rather than the whole workflow.</p>
+</li>
+<li class="lvl-2">
+<p>Dependencies: Like mentioned above there's intentionally zero support for dependencies of any kind. Although some build tools undoubtedly could combine several files into one, it's suggested that if you find yourself needing many dependencies, then your code may be better suited for an NPM module. Whereas code best suited to be a function generally should be able to be accomplished without any dependencies.</p>
+</li>
+<li class="lvl-2">
+<p>Breaking Changes: You may notice that there's a significant lack of any versioning mentioned or supported in NfuncM. This is intentional, NfuncM doesn't intend to replace package managers supporting different versions or pre-release channels of code. It's intended to provide a single function with simple interfaces. It's recommended to provide a link to functions that will continue to get improvements to users without any action on their part (This means it's best to <strong>not</strong> provide a link to your code that's static and will never change, such as on a specific tag of your repo, as they will then never see any updates). If your function does need breaking changes to improve, it's recommended to do this either in a way where your function can accept either the old style of usage, or the new to support any version, or that the new version is itself a brand new function. Leaving the old one still available.</p>
+</li>
+</ul>
+
+
+</body>
+</html>
+

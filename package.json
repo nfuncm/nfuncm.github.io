@@ -1,0 +1,32 @@
+{
+  "name": "nfuncm.github.io",
+  "version": "1.0.0",
+  "description": "The site for NfuncM",
+  "scripts": {
+    "serve": "sloth-serve",
+    "build": "sloth-build",
+    "dev:serve": "cross-env NODE_ENV=development concurrently -n node,content -c blue,yellow 'npm:watch:build' 'npm:serve'",
+    "watch:build": "nodemon --exec \"npm run build\"",
+    "watch:serve": "nodemon --exec \"npm run serve\""
+  },
+  "keywords": [
+    "nfuncm"
+  ],
+  "author": "confused-Techie",
+  "repository": "https://github.com/nfuncm/nfuncm.github.io",
+  "license": "MIT",
+  "nodemonConfig": {
+    "ext": "js,json,md,ejs,css,scss",
+    "ignore": [
+      "./dist"
+    ]
+  },
+  "dependencies": {
+    "sloth": "github:confused-Techie/sloth"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.0.1"
+  }
+}
