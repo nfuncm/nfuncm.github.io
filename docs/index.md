@@ -1,6 +1,6 @@
 ---
 title: Node Function Manager | Home
-curbook: home
+view: home
 ---
 
 #### Welcome to the Node Function Manager or NfuncM for short
